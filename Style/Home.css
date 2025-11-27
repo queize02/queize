@@ -1,0 +1,70 @@
+/* Réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;           /* fixe en haut */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    background: #222;
+    color: white;
+    z-index: 1000;
+}
+
+/* Liste des liens */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+/* Liens */
+.nav-links li a {
+    position: relative; /* pour ::after */
+    color: white;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+/* Effet sur hover */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #dcdcdc;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+/* Espace pour que le contenu ne soit pas caché par la navbar */
+body {
+    padding-top: 60px; /* ajuster selon la hauteur de la navbar */
+    font-family: "Roboto", sans-serif;
+    
+
+}
+
+/* Titre centré */
+h1 {
+    text-align: center;
+    margin-top: 220px;
+    padding-left: -100px;
+}
