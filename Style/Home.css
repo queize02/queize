@@ -10,7 +10,7 @@
 
 html {
     height: 100%; 
-    /* AJOUT : Couleur de secours sur l'élément racine */
+    /* Couleur de secours pour l'élément racine */
     background-color: #222;
 }
 
@@ -19,29 +19,38 @@ body {
     /* GARANTI : La page prend au moins la hauteur visible de l'écran */
     min-height: 100vh; 
     
-    /* COULEUR DE SECOURS : Masque le fond gris potentiel sur mobile */
+    /* COULEUR DE SECOURS : Masque le fond gris potentiel si l'image n'est pas parfaite */
     background-color: #222; 
     
-    /* IMAGE DE FOND : Couverture totale et centrage */
+    /* IMAGE DE FOND : Couverture totale (cover) et centrage (center center) */
     background: url('../Images/background.jpg') no-repeat center center/cover;
     
-    /* STRUCTURE : Active Flexbox sur le body pour un alignement vertical */
+    /* STRUCTURE : Le body est la colonne principale Flexbox */
     display: flex;
     flex-direction: column; 
 }
 
 /* ------------------------------------ */
-/* 2. NAVBAR & CONTENU PRINCIPAL */
+/* 2. NAVBAR & CENTRAGE DU CONTENU (HERO) */
 /* ------------------------------------ */
 
-/* TEXTE H1 : Centrage sur l'image et style */
-h1 {
-    /* Centrage vertical dans l'espace restant (entre navbar et bas de page) */
-    margin: auto 0; 
+/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
+.main-content {
+    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
+    flex-grow: 1; 
     
-    /* Décale le H1 pour qu'il ne soit pas masqué par la navbar fixe (48px) */
-    padding-top: 48px; 
+    /* Utilise Flexbox pour centrer le H1 à l'intérieur de cet espace */
+    display: flex;
+    justify-content: center; /* Centrage horizontal */
+    align-items: center;     /* Centrage vertical */
+}
 
+/* TEXTE H1 : Simplement stylé, le centrage est géré par .main-content */
+h1 {
+    /* Suppression des marges et paddings qui interfèrent avec le centrage Flexbox */
+    margin: 0;
+    padding: 0;
+    
     /* Styles visuels */
     text-align: center;
     color: white; 
@@ -130,10 +139,8 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
-    /* CORRECTION CLÉ : Suppression de la règle de fond qui causait le fond gris/le rognage */
-    /* body{
-        background: url('../Images/background.jpg') no-repeat center bottom/cover;    
-    } */
+    /* CORRECTION CLÉ : Suppression de la règle de fond contradictoire */
+    /* L'arrière-plan du body général est appliqué ici */
     
     .navbar {
         justify-content: space-between; 
