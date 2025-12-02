@@ -5,48 +5,45 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-    box-sizing: border-box; /* IMPORTANT : Assure que padding et border sont inclus dans la taille */
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la taille totale */
 }
 
-/* CORRECTION CLÉ : Force la page à prendre 100% de la hauteur visible et enlève le scroll inutile */
 html {
     height: 100%; 
+    /* AJOUT : Couleur de secours sur l'élément racine */
+    background-color: #222;
 }
 
 body {
     font-family: Arial, sans-serif;
+    /* GARANTI : La page prend au moins la hauteur visible de l'écran */
     min-height: 100vh; 
     
-    /* Image de fond en plein écran */
+    /* COULEUR DE SECOURS : Masque le fond gris potentiel sur mobile */
+    background-color: #222; 
+    
+    /* IMAGE DE FOND : Couverture totale et centrage */
     background: url('../Images/background.jpg') no-repeat center center/cover;
     
-    /* ---------------------------------- */
-    /* NOUVEAU : Active Flexbox sur le body */
+    /* STRUCTURE : Active Flexbox sur le body pour un alignement vertical */
     display: flex;
-    /* Aligner le contenu (h1) verticalement */
     flex-direction: column; 
-    /* ---------------------------------- */
 }
 
 /* ------------------------------------ */
 /* 2. NAVBAR & CONTENU PRINCIPAL */
 /* ------------------------------------ */
 
-/* CORRECTION : Décale le contenu principal pour qu'il ne soit pas caché par la navbar fixe (48px) */
-/* CORRECTION CLÉ : Centrage du H1 dans l'espace vertical disponible */
+/* TEXTE H1 : Centrage sur l'image et style */
 h1 {
-    /* SUPPRIMER margin-top: 68px; */
-    
-    /* 1. Mettre une marge en haut et en bas automatique pour le centrer */
+    /* Centrage vertical dans l'espace restant (entre navbar et bas de page) */
     margin: auto 0; 
     
-    /* 2. S'assurer qu'il soit toujours sous la navbar (nécessaire si vous utilisez margin: auto) */
-    padding-top: 48px; /* Hauteur de la navbar */
+    /* Décale le H1 pour qu'il ne soit pas masqué par la navbar fixe (48px) */
+    padding-top: 48px; 
 
-    /* 3. Centrage horizontal du texte (déjà en place) */
+    /* Styles visuels */
     text-align: center;
-    
-    /* 4. Pour le style, rendre le texte lisible sur le ciel */
     color: white; 
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
 }
@@ -103,11 +100,10 @@ h1 {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
-    /* Reste absolu pour l'animation */
     position: absolute; 
     right: 20px;
-    top: 50%; /* Centre verticalement */
-    transform: translateY(-50%); /* Ajuste le centrage vertical */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .hamburger span {
@@ -117,6 +113,7 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* États du hamburger */
 .hamburger.toggle span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -133,30 +130,29 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
-    body{
-background: url('../Images/background.jpg') no-repeat center bottom/cover;    }
+    /* CORRECTION CLÉ : Suppression de la règle de fond qui causait le fond gris/le rognage */
+    /* body{
+        background: url('../Images/background.jpg') no-repeat center bottom/cover;    
+    } */
     
     .navbar {
-        /* Permet à justify-content: space-between de fonctionner */
         justify-content: space-between; 
-        padding: 0 20px; /* Ajustement du padding */
+        padding: 0 20px;
     }
 
     /* Le hamburger devient visible */
     .hamburger {
         display: flex;
-        /* Remplacement du positionnement pour le centrer dans la navbar */
         position: absolute; 
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1001; /* Doit être au-dessus du menu actif */
+        z-index: 1001;
     }
     
-    /* Menu initial : caché derrière le coin du hamburger */
+    /* Menu initial : caché */
     .nav-links {
         position: fixed;
-        /* Positionne le menu actif sous le coin du hamburger */
         top: 20px; 
         right: 20px; 
         width: 0;
@@ -181,6 +177,4 @@ background: url('../Images/background.jpg') no-repeat center bottom/cover;    }
         height: 100vh;
         border-radius: 0;
     }
-
-    /* (Le second media query n'est plus nécessaire car il y a des doublons avec le premier) */
 }
