@@ -115,6 +115,13 @@ h1 {
 /* ------------------------------------ */
 
 @media screen and (max-width: 768px) {
+
+    body{
+        background-repeat:  no-repeat ;
+        background-size: cover cover;
+        background-position: center;
+/* La partie clé est /cover */
+    }
     
     .navbar {
         /* Permet à justify-content: space-between de fonctionner */
