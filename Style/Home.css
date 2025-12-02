@@ -16,11 +16,17 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    /* CORRECTION CLÉ : Force le body à couvrir toute la hauteur visible */
     min-height: 100vh; 
     
     /* Image de fond en plein écran */
     background: url('../Images/background.jpg') no-repeat center center/cover;
+    
+    /* ---------------------------------- */
+    /* NOUVEAU : Active Flexbox sur le body */
+    display: flex;
+    /* Aligner le contenu (h1) verticalement */
+    flex-direction: column; 
+    /* ---------------------------------- */
 }
 
 /* ------------------------------------ */
@@ -28,10 +34,22 @@ body {
 /* ------------------------------------ */
 
 /* CORRECTION : Décale le contenu principal pour qu'il ne soit pas caché par la navbar fixe (48px) */
+/* CORRECTION CLÉ : Centrage du H1 dans l'espace vertical disponible */
 h1 {
-    /* 48px (navbar height) + 20px de marge */
-    margin-top: 68px; 
+    /* SUPPRIMER margin-top: 68px; */
+    
+    /* 1. Mettre une marge en haut et en bas automatique pour le centrer */
+    margin: auto 0; 
+    
+    /* 2. S'assurer qu'il soit toujours sous la navbar (nécessaire si vous utilisez margin: auto) */
+    padding-top: 48px; /* Hauteur de la navbar */
+
+    /* 3. Centrage horizontal du texte (déjà en place) */
     text-align: center;
+    
+    /* 4. Pour le style, rendre le texte lisible sur le ciel */
+    color: white; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
 }
 
 /* Navbar */
@@ -117,8 +135,7 @@ h1 {
 @media screen and (max-width: 768px) {
 
     body{
-background: url('../Images/background.jpg') no-repeat center top/contain #333;
-    }
+background: url('../Images/background.jpg') no-repeat center bottom/cover;    }
     
     .navbar {
         /* Permet à justify-content: space-between de fonctionner */
