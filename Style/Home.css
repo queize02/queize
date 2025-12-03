@@ -74,12 +74,18 @@ background: var(--color-dark) url('../Images/background.jpg') no-repeat center c
     bottom: 0;
     width: 0;
     height: 2px;
+<<<<<<< HEAD
     background-color: var(--color-light);
     transition: width var(--transition-speed) ease;
+=======
+
+>>>>>>> d53a4da6a7d2a0f1cb64c85e58803e5c7a19d6ea
 }
 
 .nav-links li a:hover::after {
     width: 100%;
+        background-color: #dcdcdc;
+    transition: width 0.3s ease;
 }
 
 /* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
@@ -139,6 +145,7 @@ h1 {
 /* ------------------------------------ */
 
 @media screen and (max-width: 768px) {
+<<<<<<< HEAD
     
     body{
         background-image: url("../Images/mobile.jpg");
@@ -147,6 +154,8 @@ h1 {
     h1{
         margin-bottom: 300px;
     }
+=======
+>>>>>>> d53a4da6a7d2a0f1cb64c85e58803e5c7a19d6ea
 
 
     .navbar {
