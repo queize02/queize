@@ -114,34 +114,42 @@ h1 {
 /* 3. RESPONSIVE (MÉDIA QUERIES) */
 /* ------------------------------------ */
 
-@media screen and (max-width: 768px) {
+ 
     
+  @media screen and (max-width: 768px) {
+    
+    body{
+        background-image: url("../Images/mobile.jpg");
+    }
+
+    h1{
+        margin-bottom: 300px;
+    }
+
+
     .navbar {
-        /* Permet à justify-content: space-between de fonctionner */
         justify-content: space-between; 
-        padding: 0 20px; /* Ajustement du padding */
+        padding: 0 20px;
     }
 
     /* Le hamburger devient visible */
     .hamburger {
         display: flex;
-        /* Remplacement du positionnement pour le centrer dans la navbar */
         position: absolute; 
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1001; /* Doit être au-dessus du menu actif */
+        z-index: 1001;
     }
     
-    /* Menu initial : caché derrière le coin du hamburger */
+    /* Menu initial : caché */
     .nav-links {
         position: fixed;
-        /* Positionne le menu actif sous le coin du hamburger */
         top: 20px; 
         right: 20px; 
         width: 0;
         height: 0;
-        background: #222;
+        background: var(--color-dark);
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -161,6 +169,4 @@ h1 {
         height: 100vh;
         border-radius: 0;
     }
-
-    /* (Le second media query n'est plus nécessaire car il y a des doublons avec le premier) */
 }
