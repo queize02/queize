@@ -1,41 +1,43 @@
 /* ------------------------------------ */
 /* 1. RÉINITIALISATION & STRUCTURE GLOBALE */
 /* ------------------------------------ */
+:root {
+    /* Variables CSS pour les couleurs et le temps de transition */
+    --color-dark: #22222277;
+    --color-light: #dcdcdc;
+    --transition-speed: 0.3s;
+}
+
 * {
     margin: 0;
     padding: 0;
     text-decoration: none;
-    box-sizing: border-box; /* IMPORTANT : Assure que padding et border sont inclus dans la taille */
+    box-sizing: border-box; 
 }
 
-/* CORRECTION CLÉ : Force la page à prendre 100% de la hauteur visible et enlève le scroll inutile */
 html {
     height: 100%; 
-    overflow-y: hidden; /* Empêche l'apparition de la barre de défilement (scrollbar) */
+    background-color: var(--color-dark);
 }
 
 body {
     font-family: Arial, sans-serif;
-    /* CORRECTION CLÉ : Force le body à couvrir toute la hauteur visible */
     min-height: 100vh; 
     
-    /* Image de fond en plein écran */
-    background: url('../Images/background.jpg') no-repeat center center/cover;
+    /* BACKGROUND OPTIMISÉ : Couleur de secours (#222), image, non-répétition, centrage, et couverture totale */
+background: var(--color-dark) url('../Images/background.jpg') no-repeat center center/cover;    
+    /* STRUCTURE : Colonne principale Flexbox */
+    display: flex;
+    flex-direction: column; 
 }
 
 /* ------------------------------------ */
-/* 2. NAVBAR & CONTENU PRINCIPAL */
+/* 2. NAVBAR & CENTRAGE DU CONTENU (HERO) */
 /* ------------------------------------ */
 
-/* CORRECTION : Décale le contenu principal pour qu'il ne soit pas caché par la navbar fixe (48px) */
-h1 {
-    /* 48px (navbar height) + 20px de marge */
-    margin-top: 68px; 
-    text-align: center;
-}
-
-/* Navbar */
+/* NAVBAR (HEADER) */
 .navbar {
+    /* J'utilise le sélecteur .navbar comme c'est le nom de la classe dans votre HTML */
     position: fixed;
     top: 0;
     left: 0;
@@ -44,7 +46,7 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 15px 30px;
-    background: #222;
+    background: var(--color-dark);
     color: white;
     z-index: 1000;
     height: 48px;
@@ -72,13 +74,35 @@ h1 {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #dcdcdc;
-    transition: width 0.3s ease;
+    background-color: var(--color-light);
+    transition: width var(--transition-speed) ease;
 }
 
 .nav-links li a:hover::after {
     width: 100%;
 }
+
+/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
+.main-content {
+    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
+    flex-grow: 1; 
+    
+    /* Centrage parfait du contenu H1 */
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+}
+
+/* TEXTE H1 : Le centrage parfait par .main-content rend cette marge inutile */
+h1 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
+    /* J'ai retiré la marge-bas de 400px qui forçait le texte vers le haut */
+}
+
 
 /* Hamburger */
 .hamburger {
@@ -86,20 +110,20 @@ h1 {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
-    /* Reste absolu pour l'animation */
     position: absolute; 
     right: 20px;
-    top: 50%; /* Centre verticalement */
-    transform: translateY(-50%); /* Ajuste le centrage vertical */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .hamburger span {
     width: 28px;
     height: 3px;
     background: white;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
+/* États du hamburger */
 .hamburger.toggle span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -114,9 +138,7 @@ h1 {
 /* 3. RESPONSIVE (MÉDIA QUERIES) */
 /* ------------------------------------ */
 
- 
-    
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     
     body{
         background-image: url("../Images/mobile.jpg");
