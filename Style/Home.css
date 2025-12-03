@@ -5,33 +5,56 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
-    box-sizing: border-box; /* IMPORTANT : Assure que padding et border sont inclus dans la taille */
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la taille totale */
 }
 
-/* CORRECTION CLÉ : Force la page à prendre 100% de la hauteur visible et enlève le scroll inutile */
 html {
     height: 100%; 
-    overflow-y: hidden; /* Empêche l'apparition de la barre de défilement (scrollbar) */
+    /* Couleur de secours pour l'élément racine */
+    background-color: #222;
 }
 
 body {
     font-family: Arial, sans-serif;
-    /* CORRECTION CLÉ : Force le body à couvrir toute la hauteur visible */
+    /* GARANTI : La page prend au moins la hauteur visible de l'écran */
     min-height: 100vh; 
     
-    /* Image de fond en plein écran */
+    /* COULEUR DE SECOURS : Masque le fond gris potentiel si l'image n'est pas parfaite */
+    background-color: #222; 
+    
+    /* IMAGE DE FOND : Couverture totale (cover) et centrage (center center) */
     background: url('../Images/background.jpg') no-repeat center center/cover;
+    
+    /* STRUCTURE : Le body est la colonne principale Flexbox */
+    display: flex;
+    flex-direction: column; 
 }
 
 /* ------------------------------------ */
-/* 2. NAVBAR & CONTENU PRINCIPAL */
+/* 2. NAVBAR & CENTRAGE DU CONTENU (HERO) */
 /* ------------------------------------ */
 
-/* CORRECTION : Décale le contenu principal pour qu'il ne soit pas caché par la navbar fixe (48px) */
+/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
+.main-content {
+    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
+    flex-grow: 1; 
+    
+    /* Utilise Flexbox pour centrer le H1 à l'intérieur de cet espace */
+    display: flex;
+    justify-content: center; /* Centrage horizontal */
+    align-items: center;     /* Centrage vertical */
+}
+
+/* TEXTE H1 : Simplement stylé, le centrage est géré par .main-content */
 h1 {
-    /* 48px (navbar height) + 20px de marge */
-    margin-top: 68px; 
+    /* Suppression des marges et paddings qui interfèrent avec le centrage Flexbox */
+    margin: 0;
+    padding: 0;
+    
+    /* Styles visuels */
     text-align: center;
+    color: white; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
 }
 
 /* Navbar */
@@ -86,11 +109,10 @@ h1 {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
-    /* Reste absolu pour l'animation */
     position: absolute; 
     right: 20px;
-    top: 50%; /* Centre verticalement */
-    transform: translateY(-50%); /* Ajuste le centrage vertical */
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .hamburger span {
@@ -100,6 +122,7 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* États du hamburger */
 .hamburger.toggle span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -116,32 +139,25 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
-    body{
-        background-size: auto;
-
-    }
     
     .navbar {
-        /* Permet à justify-content: space-between de fonctionner */
         justify-content: space-between; 
-        padding: 0 20px; /* Ajustement du padding */
+        padding: 0 20px;
     }
 
     /* Le hamburger devient visible */
     .hamburger {
         display: flex;
-        /* Remplacement du positionnement pour le centrer dans la navbar */
         position: absolute; 
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1001; /* Doit être au-dessus du menu actif */
+        z-index: 1001;
     }
     
-    /* Menu initial : caché derrière le coin du hamburger */
+    /* Menu initial : caché */
     .nav-links {
         position: fixed;
-        /* Positionne le menu actif sous le coin du hamburger */
         top: 20px; 
         right: 20px; 
         width: 0;
@@ -166,6 +182,4 @@ h1 {
         height: 100vh;
         border-radius: 0;
     }
-
-    /* (Le second media query n'est plus nécessaire car il y a des doublons avec le premier) */
 }
