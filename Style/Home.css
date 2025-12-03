@@ -1,32 +1,31 @@
 /* ------------------------------------ */
 /* 1. RÉINITIALISATION & STRUCTURE GLOBALE */
 /* ------------------------------------ */
-:root {
-    /* Variables CSS pour les couleurs et le temps de transition */
-    --color-dark: #22222277;
-    --color-light: #dcdcdc;
-    --transition-speed: 0.3s;
-}
-
 * {
     margin: 0;
     padding: 0;
     text-decoration: none;
-    box-sizing: border-box; 
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la taille totale */
 }
 
 html {
     height: 100%; 
-    background-color: var(--color-dark);
+    /* Couleur de secours pour l'élément racine */
+    background-color: #222;
 }
 
 body {
     font-family: Arial, sans-serif;
+    /* GARANTI : La page prend au moins la hauteur visible de l'écran */
     min-height: 100vh; 
     
-    /* BACKGROUND OPTIMISÉ : Couleur de secours (#222), image, non-répétition, centrage, et couverture totale */
-background: var(--color-dark) url('../Images/background.jpg') no-repeat center center/cover;    
-    /* STRUCTURE : Colonne principale Flexbox */
+    /* COULEUR DE SECOURS : Masque le fond gris potentiel si l'image n'est pas parfaite */
+    background-color: #222; 
+    
+    /* IMAGE DE FOND : Couverture totale (cover) et centrage (center center) */
+    background: url('../Images/background.jpg') no-repeat center center/cover;
+    
+    /* STRUCTURE : Le body est la colonne principale Flexbox */
     display: flex;
     flex-direction: column; 
 }
@@ -35,9 +34,31 @@ background: var(--color-dark) url('../Images/background.jpg') no-repeat center c
 /* 2. NAVBAR & CENTRAGE DU CONTENU (HERO) */
 /* ------------------------------------ */
 
-/* NAVBAR (HEADER) */
+/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
+.main-content {
+    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
+    flex-grow: 1; 
+    
+    /* Utilise Flexbox pour centrer le H1 à l'intérieur de cet espace */
+    display: flex;
+    justify-content: center; /* Centrage horizontal */
+    align-items: center;     /* Centrage vertical */
+}
+
+/* TEXTE H1 : Simplement stylé, le centrage est géré par .main-content */
+h1 {
+    /* Suppression des marges et paddings qui interfèrent avec le centrage Flexbox */
+    margin: 0;
+    padding: 0;
+    
+    /* Styles visuels */
+    text-align: center;
+    color: white; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
+}
+
+/* Navbar */
 .navbar {
-    /* J'utilise le sélecteur .navbar comme c'est le nom de la classe dans votre HTML */
     position: fixed;
     top: 0;
     left: 0;
@@ -46,7 +67,7 @@ background: var(--color-dark) url('../Images/background.jpg') no-repeat center c
     justify-content: center;
     align-items: center;
     padding: 15px 30px;
-    background: var(--color-dark);
+    background: #222;
     color: white;
     z-index: 1000;
     height: 48px;
@@ -74,35 +95,13 @@ background: var(--color-dark) url('../Images/background.jpg') no-repeat center c
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: var(--color-light);
-    transition: width var(--transition-speed) ease;
+    background-color: #dcdcdc;
+    transition: width 0.3s ease;
 }
 
 .nav-links li a:hover::after {
     width: 100%;
 }
-
-/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
-.main-content {
-    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
-    flex-grow: 1; 
-    
-    /* Centrage parfait du contenu H1 */
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
-}
-
-/* TEXTE H1 : Le centrage parfait par .main-content rend cette marge inutile */
-h1 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white; 
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
-    /* J'ai retiré la marge-bas de 400px qui forçait le texte vers le haut */
-}
-
 
 /* Hamburger */
 .hamburger {
@@ -120,7 +119,7 @@ h1 {
     width: 28px;
     height: 3px;
     background: white;
-    transition: all var(--transition-speed) ease;
+    transition: all 0.3s ease;
 }
 
 /* États du hamburger */
@@ -139,16 +138,10 @@ h1 {
 /* ------------------------------------ */
 
 @media screen and (max-width: 768px) {
+
+    /* CORRECTION CLÉ : Suppression de la règle de fond contradictoire */
+    /* L'arrière-plan du body général est appliqué ici */
     
-    body{
-        background-image: url("../Images/mobile.jpg");
-    }
-
-    h1{
-        margin-bottom: 300px;
-    }
-
-
     .navbar {
         justify-content: space-between; 
         padding: 0 20px;
@@ -171,7 +164,7 @@ h1 {
         right: 20px; 
         width: 0;
         height: 0;
-        background: var(--color-dark);
+        background: #222;
         overflow: hidden;
         display: flex;
         flex-direction: column;
