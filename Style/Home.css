@@ -95,12 +95,13 @@ h1 {
     bottom: 0;
     width: 0;
     height: 2px;
-    background-color: #dcdcdc;
-    transition: width 0.3s ease;
+
 }
 
 .nav-links li a:hover::after {
     width: 100%;
+        background-color: #dcdcdc;
+    transition: width 0.3s ease;
 }
 
 /* Hamburger */
@@ -139,6 +140,13 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
+    body{
+        /* ... autres propriétés ... */
+        background-image: url(../Images/mobile.jpg); /* Assurez-vous que c'est bien la version N&B que vous voulez */
+        background-size: cover; /* Important : remplit l'écran */
+        background-position: center center; /* Important : centre l'image */
+        background-repeat: no-repeat;
+    }
     
     .navbar {
         justify-content: space-between; 
