@@ -140,14 +140,7 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
-    body{
-        /* ... autres propriétés ... */
-        background-image: url(../Images/mobile.jpg); /* Assurez-vous que c'est bien la version N&B que vous voulez */
-        background-size: cover; /* Important : remplit l'écran */
-        background-position: center center; /* Important : centre l'image */
-        background-repeat: no-repeat;
-    }
-    
+
     .navbar {
         justify-content: space-between; 
         padding: 0 20px;
