@@ -139,8 +139,6 @@ h1 {
 
 @media screen and (max-width: 768px) {
 
-    /* CORRECTION CLÉ : Suppression de la règle de fond contradictoire */
-    /* L'arrière-plan du body général est appliqué ici */
     
     .navbar {
         justify-content: space-between; 
