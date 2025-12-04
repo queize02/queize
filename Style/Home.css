@@ -3,7 +3,7 @@
 /* ------------------------------------ */
 :root {
     /* Variables CSS pour les couleurs et le temps de transition */
-    --color-dark: #22222277;
+    --color-dark: rgba(34, 34, 34, 0.8); /* 🔑 FIX: Utiliser rgba dans la variable pour le fond semi-transparent */
     --color-light: #dcdcdc;
     --transition-speed: 0.3s;
 }
@@ -23,10 +23,7 @@ html {
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh; 
-    
-    /* BACKGROUND OPTIMISÉ : Couleur de secours (#222), image, non-répétition, centrage, et couverture totale */
-background: var(--color-dark) url('../Images/background.jpg') no-repeat center center/cover;    
-    /* STRUCTURE : Colonne principale Flexbox */
+    background: var(--color-dark) url('../Images/background.jpg') no-repeat center center/cover;
     display: flex;
     flex-direction: column; 
 }
@@ -37,158 +34,110 @@ background: var(--color-dark) url('../Images/background.jpg') no-repeat center c
 
 /* NAVBAR (HEADER) */
 .navbar {
-    /* J'utilise le sélecteur .navbar comme c'est le nom de la classe dans votre HTML */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    
+    /* 🔑 FIX: Permet de pousser les éléments aux extrémités */
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Pour séparer les groupes de liens */
     align-items: center;
-    padding: 15px 30px;
-    background: var(--color-dark);
+    
+    padding: 0 40px; /* Padding latéral pour l'espace */
+    height: 48px;
+    background: var(--color-dark); /* 🔑 Utilisation de la variable */
     color: white;
     z-index: 1000;
-    height: 48px;
 }
 
-/* Liens */
+/* Liens (Conteneur principal) */
 .nav-links {
     list-style: none;
     display: flex;
     gap: 30px;
+    
+    /* 🔑 CLÉ 1 : Le conteneur doit prendre tout l'espace restant pour que l'alignement fonctionne */
+    flex-grow: 1; 
+    
+    /* 🔑 CLÉ 2 : Aligne les liens de base au centre, entre la gauche et la droite */
+    justify-content: center; 
+    
+    /* Fixer le padding pour éviter les conflits */
+    padding: 0; 
+    margin: 0;
 }
 
 .nav-links li a {
     color: white;
     font-size: 16px;
     font-family: 'Courier New', Courier, monospace;
-    padding: 5px 10px;
+    padding: 5px 0; /* Padding seulement vertical */
     position: relative;
+    /* ... styles after/hover ... */
 }
 
-.nav-links li a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--color-light);
-    transition: width var(--transition-speed) ease;
-}
-
-.nav-links li a:hover::after {
-    width: 100%;
-}
-
-/* CONTENEUR PRINCIPAL : Prend toute la hauteur disponible sous la navbar */
-.main-content {
-    /* flex-grow: 1 force le conteneur à prendre tout l'espace vertical libre */
-    flex-grow: 1; 
+/* --- STYLES DES BOUTONS LOGIN/REGISTER --- */
+.auth-link {
+    /* 🔑 CLÉ 3 : Pousse cet élément et tous les suivants à l'extrême droite */
+    margin-left: auto;
     
-    /* Centrage parfait du contenu H1 */
-    display: flex;
-    justify-content: center; 
-    align-items: center;    
+    /* Retire la marge gauche pour les autres éléments. Nous utilisons l'auto ci-dessus. */
+    padding: 0 10px; 
 }
 
-/* TEXTE H1 : Le centrage parfait par .main-content rend cette marge inutile */
-h1 {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white; 
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); 
-    /* J'ai retiré la marge-bas de 400px qui forçait le texte vers le haut */
+.auth-link a {
+    /* Style du bouton avec bordure blanche */
+    color: white;
+    border: 2px solid white; /* BORDURE BLANCHE */
+    border-radius: 5px;
+    padding: 6px 10px; 
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
+.auth-link a:hover {
+    background-color: white;
+    color: #343a40;
+}
+/* ... le reste de vos styles pour .main-content, h1, et .hamburger ... */
 
-/* Hamburger */
-.hamburger {
-    display: none; /* Caché par défaut sur grand écran */
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    position: absolute; 
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.hamburger span {
-    width: 28px;
-    height: 3px;
-    background: white;
-    transition: all var(--transition-speed) ease;
-}
-
-/* États du hamburger */
-.hamburger.toggle span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.toggle span:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.toggle span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
 
 /* ------------------------------------ */
 /* 3. RESPONSIVE (MÉDIA QUERIES) */
 /* ------------------------------------ */
 
 @media screen and (max-width: 768px) {
-    
-    body{
-        background-image: url("../Images/mobile.jpg");
-    }
+    /* ... styles de votre menu hamburger ... */
 
-    h1{
-        margin-bottom: 300px;
+    /* Retirer la règle 'auto' en mobile pour ne pas écraser l'alignement vertical */
+    .auth-link {
+        margin-left: 0; 
+        order: -1;
     }
+}
+.link-to-login {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
 
+.link-to-login a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-    .navbar {
-        justify-content: space-between; 
-        padding: 0 20px;
-    }
+.link-to-login a:hover {
+    text-decoration: underline;
+}
 
-    /* Le hamburger devient visible */
-    .hamburger {
-        display: flex;
-        position: absolute; 
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1001;
-    }
-    
-    /* Menu initial : caché */
-    .nav-links {
-        position: fixed;
-        top: 20px; 
-        right: 20px; 
-        width: 0;
-        height: 0;
-        background: var(--color-dark);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 40px;
-        border-radius: 8px;
-        transition: all 0.5s ease;
-        z-index: 999;
-    }
+/* Vous pouvez aussi changer la couleur du bouton d'inscription */
+#register-btn {
+    background-color: #28a745; /* Vert pour l'inscription */
+}
 
-    /* Menu actif : plein écran */
-    .nav-links.active {
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-    }
+#register-btn:hover {
+    background-color: #1e7e34;
 }

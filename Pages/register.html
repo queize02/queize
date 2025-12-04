@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Créer un Compte</title>
+    
+    <link rel="stylesheet" href="../Style/register.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <form id="register-form">
+            <h2>Créer un compte</h2>
+            
+            <label for="register-email">Email</label>
+            <input type="email" id="register-email" required>
+            
+            <label for="register-password">Mot de passe</label>
+            <input type="password" id="register-password" required>
+            
+            <button type="submit" id="register-btn">S'inscrire</button>
+
+            <p class="link-to-login">
+                Vous avez déjà un compte ? <a href="login.html">Connectez-vous ici.</a>
+            </p>
+
+            <p id="message"></p>
+        </form>
+    </div>
+
+    <script src="../auth.js"></script>
+
+</body>
+</html>

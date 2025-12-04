@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Tableau de Bord Utilisateur</title> <style>
+        /* Styles pour centrer le contenu et donner un look propre */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centrage vertical */
+            align-items: center; /* Centrage horizontal */
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .content-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Style du message principal */
+        #user-display { /* 🚨 ID CRUCIAL pour le JS */
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        
+        /* Style du bouton de déconnexion */
+        #logout-btn {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        <h2>Bienvenue !</h2>
+        
+        <p id="user-display">Chargement...</p>
+
+        <button id="logout-btn">Se Déconnecter</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userDisplayElement = document.getElementById('user-display');
+            const logoutButton = document.getElementById('logout-btn');
+            
+            // 1. Tenter de récupérer l'email depuis localStorage
+            const userEmail = localStorage.getItem('currentUserEmail');
+
+            if (userEmail) {
+                // Succès : Afficher l'email de l'utilisateur
+                userDisplayElement.textContent = userEmail;
+
+                // 2. Gérer la déconnexion
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('currentUserEmail'); // Nettoyer le stockage
+                    window.location.href = "login.html"; 
+                });
+
+            } else {
+                // Échec : Rediriger l'utilisateur s'il n'est pas "connecté"
+                userDisplayElement.textContent = "Accès non autorisé. Redirection...";
+                if (logoutButton) logoutButton.style.display = 'none';
+
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 1000);
+            }
+        });
+    </script>
+
+</body>
+</html>
