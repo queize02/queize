@@ -4,53 +4,59 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="shortcut icon" href="../Images/house-regular-full.svg" type="image/x-icon">
- <link rel="stylesheet" href="../Home.css">
+ <link rel="stylesheet" href="../Style/Home.css">
  <title>Home Page</title>
 </head>
 <body>
 
 <header>
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li class="nav-item"><a href="Home.html">Home</a></li>
-            <li class="nav-item"><a href="Contact.html">Contact</a></li>
-            <li class="nav-item"><a href="Help.html">Help</a></li>
-            <li class="nav-item"><a href="Support.html">Support</a></li>
-            
-            <li class="nav-item auth-link"><a href="login.html">Login</a></li>
-            <li class="nav-item auth-link"><a href="register.html">Register</a></li>
-        </ul>
-        
-        <div class="hamburger-menu">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </nav>
+<nav class="navbar">
+    
+    <ul class="nav-links">
+        <li class="nav-item"><a href="Home.html">Home</a></li>
+        <li class="nav-item"><a href="Contact.html">Contact</a></li>
+        <li class="nav-item"><a href="Help.html">Help</a></li>
+        <li class="nav-item"><a href="Support.html">Support</a></li>
+    </ul>
+    
+    <div class="auth-group">
+        <a href="login.html" class="auth-link">Login</a>
+        <a href="register.html" class="auth-link register-btn">Register</a>
+    </div>
+    <div class="hamburger-menu">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>  
+</nav>
 </header>
 
 <main class="main-content">
  <h1>Bonjour</h1>
 </main>
 
-<script defer>
+    <script defer>
 const hamburger = document.querySelector('.hamburger-menu');
 const navLinks = document.querySelector('.nav-links');
-
+const authGroup = document.querySelector('.auth-group'); // 🔑 NOUVEAU : Récupérer le conteneur des boutons
 // Événement pour ouvrir/fermer le menu
 hamburger.addEventListener('click', () => {
     // Basculer la classe 'open' sur les liens pour afficher/masquer
     navLinks.classList.toggle('open');
     // Optionnel: Animer l'icône hamburger
     hamburger.classList.toggle('close'); 
-});
 
-// Optionnel: Fermer le menu en cliquant sur un lien
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('close');
-    });
+    if (navLinks.classList.contains('open')) {
+        // Le menu s'ouvre : On déplace le groupe de boutons à l'intérieur de l'UL
+        navLinks.appendChild(authGroup);
+        authGroup.classList.add('mobile-open'); // Ajout d'une classe pour le styler
+    }else{
+        // Le menu se ferme : On remet le groupe de boutons à sa place initiale (avant le hamburger)
+        const navbar = document.querySelector('.navbar');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        navbar.insertBefore(authGroup, hamburgerMenu);
+        authGroup.classList.remove('mobile-open');
+    }
 });
 </script>
 

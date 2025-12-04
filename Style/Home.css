@@ -8,6 +8,11 @@
     --transition-speed: 0.3s;
 }
 
+.main-content{
+    color: white;
+    text-align: center;
+    margin-top:350px;
+}
 * {
     margin: 0;
     padding: 0;
@@ -34,38 +39,51 @@ body {
 
 /* NAVBAR (HEADER) */
 .navbar {
+    /* (Vos règles de position, couleur, etc.) */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    
-    /* 🔑 FIX: Permet de pousser les éléments aux extrémités */
-    display: flex;
-    justify-content: space-between; /* Pour séparer les groupes de liens */
-    align-items: center;
-    
-    padding: 0 40px; /* Padding latéral pour l'espace */
     height: 48px;
-    background: var(--color-dark); /* 🔑 Utilisation de la variable */
+    background: var(--color-dark); 
     color: white;
     z-index: 1000;
+    
+    /* 🔑 CLÉ : Centrer tous les éléments ensemble */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    
+    padding: 0 40px; 
 }
-
 /* Liens (Conteneur principal) */
 .nav-links {
     list-style: none;
-    display: flex;
-    gap: 30px;
     
-    /* 🔑 CLÉ 1 : Le conteneur doit prendre tout l'espace restant pour que l'alignement fonctionne */
+    /* 💥 FIX : Doit être en affichage Flex pour que les marges automatiques fonctionnent */
+    display: flex; 
+    gap: 30px;
+    color: white;
+    
+    /* 🔑 CLÉ : Le conteneur prend tout l'espace disponible */
     flex-grow: 1; 
     
-    /* 🔑 CLÉ 2 : Aligne les liens de base au centre, entre la gauche et la droite */
+    /* 💥 FIX : Assurer que les liens sont centrés au milieu de l'UL */
     justify-content: center; 
     
-    /* Fixer le padding pour éviter les conflits */
     padding: 0; 
     margin: 0;
+}
+
+.nav-links li.auth-link:first-of-type {
+    margin-left: auto;
+    
+    /* On retire les styles de padding qui étaient sur la LI et non sur le A */
+    padding: 0; 
+}
+
+.nav-links li.auth-link {
+    flex-shrink: 0;
 }
 
 .nav-links li a {
@@ -78,12 +96,16 @@ body {
 }
 
 /* --- STYLES DES BOUTONS LOGIN/REGISTER --- */
-.auth-link {
-    /* 🔑 CLÉ 3 : Pousse cet élément et tous les suivants à l'extrême droite */
-    margin-left: auto;
+
+
+
+.auth-link{
+    color: white;
+    padding: 5px;
+    margin-left: 15px;
+    border: 2px solid white;
+    border-radius: 5px;
     
-    /* Retire la marge gauche pour les autres éléments. Nous utilisons l'auto ci-dessus. */
-    padding: 0 10px; 
 }
 
 .auth-link a {
@@ -102,7 +124,34 @@ body {
     color: #343a40;
 }
 /* ... le reste de vos styles pour .main-content, h1, et .hamburger ... */
+.hamburger-menu {
+    display: none; /* Masqué par défaut sur PC */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001; /* Doit être au-dessus de la navbar et du menu */
+}
 
+.hamburger-menu .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}   
+
+.hamburger-menu.close .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger-menu.close .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.close .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
 
 /* ------------------------------------ */
 /* 3. RESPONSIVE (MÉDIA QUERIES) */
@@ -111,33 +160,86 @@ body {
 @media screen and (max-width: 768px) {
     /* ... styles de votre menu hamburger ... */
 
-    /* Retirer la règle 'auto' en mobile pour ne pas écraser l'alignement vertical */
-    .auth-link {
-        margin-left: 0; 
-        order: -1;
+    .navbar {
+        /* Pousser le hamburger à droite sur mobile */
+        justify-content: flex-end; 
+        padding: 0 20px;
     }
-}
-.link-to-login {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
+
+    /* Retirer la règle 'auto' en mobile pour ne pas écraser l'alignement vertical */
+.nav-links, .auth-group {
+        display: none; 
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .nav-links {
+        /* 💥 FIX : Rendre le conteneur flex pour centrer verticalement */
+        display: flex;
+        flex-direction: column; 
+        
+        position: fixed;
+        top: 0;
+        right: -100%; /* Masqué par défaut (glisse hors de l'écran) */
+        width: 100%;
+        height: 100vh; /* Pleine hauteur de l'écran */
+        
+        background: rgba(34, 34, 34, 0.95); /* Fond sombre semi-transparent */
+        justify-content: center; /* Centrer les liens au milieu de l'écran */
+        align-items: center;
+        gap: 40px;
+        
+        transition: right 0.5s ease-in-out;
+        z-index: 999; /* Sous le hamburger */
+    }
+
+    .nav-links.open {
+        right: 0; /* Fait glisser le menu pour qu'il soit visible */
+    }
+
+    .nav-links li a {
+        font-size: 24px;
+        padding: 10px 0;
+    }
+
+    .hamburger-menu {
+    display: flex; /* Masqué par défaut sur PC */
+
+
+    
 }
 
-.link-to-login a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
+.auth-group.open {
+        /* Si vous déplacez (ou clonez) le .auth-group à l'intérieur du .nav-links */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 30px;
+    }
 
-.link-to-login a:hover {
-    text-decoration: underline;
-}
+    .auth-group {
+        display: none; 
+        margin-left: 0; /* Annuler la règle PC */
+    }
 
-/* Vous pouvez aussi changer la couleur du bouton d'inscription */
-#register-btn {
-    background-color: #28a745; /* Vert pour l'inscription */
-}
-
-#register-btn:hover {
-    background-color: #1e7e34;
+    /* 🔑 NOUVEAU : Styles pour le groupe de boutons lorsqu'il est ouvert dans le menu */
+    .auth-group.mobile-open {
+        /* Rendu visible par le JS */
+        display: flex;
+        flex-direction: column; /* Empiler les boutons Login/Register */
+        gap: 20px;
+        margin-top: 40px; /* Espace après les liens de navigation (Home, Contact...) */
+        
+        /* Centrer les boutons dans la colonne du menu */
+        align-items: center; 
+    }
+    
+    /* 🔑 NOUVEAU : S'assurer que le style de bouton fonctionne bien en colonne */
+    .auth-group .auth-link {
+        /* Le bouton doit prendre une largeur correcte */
+        width: 150px; 
+        text-align: center;
+    }
 }

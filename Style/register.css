@@ -7,6 +7,7 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: #f4f4f4;
+    
 }
 
 /* Conteneur principal du formulaire */
@@ -17,11 +18,12 @@ body {
 }
 
 /* Style du formulaire */
-#register   -form {
-    background: #fff;
+#register-form {
+    background: #fff; filter:brightness(8px);
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
 }
 
 h2 {
