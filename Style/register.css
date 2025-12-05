@@ -6,7 +6,10 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #f4f4f4;
+    background-image: url("../Images/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     
 }
 
@@ -19,9 +22,11 @@ body {
 
 /* Style du formulaire */
 #register-form {
-    background: #fff; filter:brightness(8px);
+    background: #ffffff5b;
+    backdrop-filter: blur(5px);
     padding: 30px;
     border-radius: 8px;
+    width: 90%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     
 }
@@ -82,3 +87,11 @@ input:focus {
     border-radius: 4px;
     font-size: 0.9em;
 }
+
+
+.link-to-login a{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-left: -3px;
+}
+
